@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 const imageBackground = require('./images/AgendaGo.png');
 
 export default function PageLogin() {
-
+    const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
@@ -30,7 +31,10 @@ export default function PageLogin() {
                     />
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '85%' }}>
-                    <TouchableOpacity style={styles.btn_entrar}>
+                    <TouchableOpacity 
+                        style={styles.btn_entrar}
+                        onPress={() => navigation.navigate('ResetPassword')}
+                        >
                         <Text style={{
                             fontSize: 20,
                             color: '#a5b1d1',
@@ -47,14 +51,17 @@ export default function PageLogin() {
                 </View>
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity >
-                        <Text style={{ color: '#909fc8', borderBottomWidth: 1, marginBottom: 2 }}>Esqueci minha senha</Text>
+                        <Text style={{ color: '#909fc8', borderBottomWidth: 1, marginBottom: 20, borderBottomColor: '#909fc8' }}>Esqueci minha senha</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity >
-                        <Text style={{ fontSize: 20 }}>Entrar com o Google</Text>
+                    <TouchableOpacity style={styles.btnGoogle}>
+                        <View style={styles.viewGoogle}>
+                        <Image source={require('./images/G.png')} style={styles.logoG}/>
+                           <Text style={{ fontSize: 20, }}>Entrar com o</Text> 
+                           <Image source={require('./images/Google.png')} style={styles.logoGoogle}/>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </LinearGradient>
-
         </View>
     );
 }
@@ -119,4 +126,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    viewGoogle:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '85%',
+        padding: 10,
+        backgroundColor: '#FFF',
+        alignItems: 'center',
+        borderRadius: 20,
+    },
+    logoG:{
+        width: 30,
+        height: 30,
+        marginRight: 10,
+    },
+    logoGoogle:{
+        width: 100,
+        height: 50,
+        marginLeft: 10,
+    }
 });
